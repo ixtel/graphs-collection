@@ -6,13 +6,13 @@ A collection of graphs in a variety of formats.
 Classic Graphs
 --------------
 
-#. Petersen Graph
+1. Petersen Graph
 [[gml]](Classic/Petersen/petersen.gml)
 [[gexf]](Classic/Petersen/petersen.gexf)
 [[graphml]](Classic/Petersen/petersen.graphml)
-#. Tutte Graph
+2. Tutte Graph
 [[gml]](Classic/Tutte/tutte.gml)
 [[gexf]](Classic/Tutte/tutte.gexf)
 [[graphml]](Classic/Tutte/tutte.graphml)
 
-Last updated: Wed Feb 19 12:42:38 GMT 2014.
+Last updated: Wed Feb 19 12:47:32 GMT 2014
