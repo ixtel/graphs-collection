@@ -1,6 +1,8 @@
 graphs-collection
 =================
 
+Homepage: http://mhenderson.github.io/graphs-collection/
+
 A collection of graphs in a variety of formats.
 
 * [GML](http://graphml.graphdrawing.org/)
@@ -19,4 +21,8 @@ Classic Graphs
 [[gexf]](Classic/Tutte/tutte.gexf)
 [[graphml]](Classic/Tutte/tutte.graphml)
 
-Last updated: Wed Feb 19 22:33:56 GMT 2014
+http://bit.ly/mjhenderson
+
+matthew.henderson@mykolab.ch
+
+Last updated: Wed Feb 19 23:16:50 GMT 2014
