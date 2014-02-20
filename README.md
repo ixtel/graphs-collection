@@ -12,11 +12,19 @@ A collection of graphs in a variety of formats.
 Classic Graphs
 --------------
 
-1. Petersen Graph
+1. Chvatal Graph
+[[gml]](Classic/Chvatal/chvatal.gml)
+[[gexf]](Classic/Chvatal/chvatal.gexf)
+[[graphml]](Classic/Chvatal/chvatal.graphml)
+2. Heawood Graph
+[[gml]](Classic/Heawood/heawood.gml)
+[[gexf]](Classic/Heawood/heawood.gexf)
+[[graphml]](Classic/Heawood/heawood.graphml)
+3. Petersen Graph
 [[gml]](Classic/Petersen/petersen.gml)
 [[gexf]](Classic/Petersen/petersen.gexf)
 [[graphml]](Classic/Petersen/petersen.graphml)
-2. Tutte Graph
+4. Tutte Graph
 [[gml]](Classic/Tutte/tutte.gml)
 [[gexf]](Classic/Tutte/tutte.gexf)
 [[graphml]](Classic/Tutte/tutte.graphml)
@@ -25,4 +33,4 @@ http://bit.ly/mjhenderson
 
 matthew.henderson@mykolab.ch
 
-Last updated: Wed Feb 19 23:16:50 GMT 2014
+Last updated: Thu Feb 20 14:13:39 GMT 2014.
