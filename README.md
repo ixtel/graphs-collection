@@ -1,13 +1,28 @@
 graphs-collection
 =================
 
-Homepage: http://mhenderson.github.io/graphs-collection/
+A collection of [graphs](http://en.wikipedia.org/wiki/Graph_%28mathematics%29) in a variety of exchange formats.
 
-A collection of graphs in a variety of formats.
+* Homepage: http://mhenderson.github.io/graphs-collection/
+* Repository: https://github.com/MHenderson/graphs-collection/
+* Download:
+  * [graphs-collection.tar.gz](https://github.com/MHenderson/graphs-collection/tarball/master)
+  * [graphs-collection..zip](https://github.com/MHenderson/graphs-collection/zipball/master)
+
+Supported Formats
+-----------------
 
 * [GML](http://graphml.graphdrawing.org/)
 * [GEXF](http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html)
 * [GraphML](http://gexf.net/format/)
+
+Contributors
+------------
+
+* [Matthew Henderson](mailto:matthew.henderson@mykolab.ch) ([http://bit.ly/mjhenderson](http://bit.ly/mjhenderson))
+
+The Graphs
+==========
 
 Classic Graphs
 --------------
@@ -37,8 +52,4 @@ Classic Graphs
 [gexf](Classic/Tutte/tutte.gexf),
 [graphml](Classic/Tutte/tutte.graphml),)
 
-
-matthew.henderson@mykolab.ch,
-http://bit.ly/mjhenderson
-
-Last updated: Fri Feb 21 12:41:07 GMT 2014.
+Last updated: Sat Feb 22 12:17:41 GMT 2014
