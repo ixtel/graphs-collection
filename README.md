@@ -52,4 +52,20 @@ Classic Graphs
 [gexf](Classic/Tutte/tutte.gexf),
 [graphml](Classic/Tutte/tutte.graphml),)
 
-Last updated: Sat Feb 22 12:17:41 GMT 2014
+2. Platonic Graphs
+------------------
+
+1. Icosahedral Graph
+([gml](Platonic/Icosahedral/icosahedral.gml), 
+[gexf](Platonic/Icosahedral/icosahedral.gexf), 
+[graphml](Platonic/Icosahedral/icosahedral.graphml))
+2. Octahedral Graph
+([gml](Platonic/Octahedral/octahedral.gml), 
+[gexf](Platonic/Octahedral/octahedral.gexf), 
+[graphml](Platonic/Octahedral/octahedral.graphml))
+3. Tetrahedral Graph
+([gml](Platonic/Tetrahedral/tetrahedral.gml), 
+[gexf](Platonic/Tetrahedral/tetrahedral.gexf), 
+[graphml](Platonic/Tetrahedral/tetrahedral.graphml))
+
+Last updated: Sat Feb 22 12:43:37 GMT 2014.
