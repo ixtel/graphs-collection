@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
   igraph_integer_t girth;
   FILE *ifile;
   
-  ifile = fopen("Classic/Chvatal/chvatal.gml", "r");
+  ifile = fopen("../Classic/Chvatal/chvatal.gml", "r");
   if (ifile == 0) {
     return 10;
   }
