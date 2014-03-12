@@ -3,6 +3,8 @@
 #include <igraph.h>
 #include <jansson.h>
 
+// Given a graph and a properties JSON object, check that all
+// of the properties are satisfied by the graph.
 int test(igraph_t *graph, json_t *data)
 {
   json_t *vcount, *ecount, *girth, *diameter, *radius;
@@ -32,30 +34,39 @@ int test(igraph_t *graph, json_t *data)
   return 0;
 }
 
+// Given a file containing a graph (in GML format) and a JSON
+// properties object, test that all properties hold for the graph
+// contained in the file.
+int check_properties(FILE *graph_file, json_t *properties) {
+  igraph_t g;
+  igraph_read_graph_gml(&g, graph_file);
+  test(&g, properties);
+  igraph_destroy(&g);
+}
+
 int main(int argc, char *argv[])
 {
-  igraph_t g;
   FILE *ifile;
   json_t *json;
   json_error_t error;
 
+  // Open a graph file in GML format.
   ifile = fopen("../Classic/Chvatal/chvatal.gml", "r");
   if (ifile == 0) {
     return 10;
   }
 
-  igraph_read_graph_gml(&g, ifile);
-
+  // Load a JSON file.
   json = json_load_file("../Classic/Chvatal/chvatal_properties.json", 0, &error);
   if(!json) {
        /* the error variable contains error information */
   }
 
+  // Check graph properties.
+  check_properties(ifile, json);
+
+  // Cleanup.
   fclose(ifile);
-
-  test(&g, json);
-
-  igraph_destroy(&g);
 
   return 0;
 }
