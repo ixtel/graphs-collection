@@ -1,0 +1,8 @@
+{
+  "name": "Chvatal Graph",
+  "n_vertices": 12,
+  "n_edges": 24,
+  "radius": 2,
+  "diameter": 2,
+  "girth": 4
+}
