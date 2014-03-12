@@ -3,18 +3,42 @@
 #include <igraph.h>
 #include <jansson.h>
 
-int main(int argc, char *argv[])
+int test(igraph_t *graph, json_t *data)
 {
-  igraph_t g;
+  json_t *vcount, *ecount, *girth, *diameter, *radius;
   igraph_real_t _radius;
   igraph_integer_t _diameter;
   igraph_integer_t _girth;
+
+  // Get data from JSON object.
+  vcount = json_object_get(data, "n_vertices");
+  ecount = json_object_get(data, "n_edges");
+  radius = json_object_get(data, "radius");
+  diameter = json_object_get(data, "diameter");
+  girth = json_object_get(data, "girth");
+
+  // Use igraph to compute graph parameters.
+  igraph_radius(graph, &_radius, IGRAPH_ALL);
+  igraph_diameter(graph, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
+  igraph_girth(graph, &_girth, 0);
+
+  // Test all computed parameters match data.
+  assert(igraph_vcount(graph) == json_integer_value(vcount));
+  assert(igraph_ecount(graph) == json_integer_value(ecount));
+  assert(_radius == json_integer_value(radius));
+  assert(_diameter == json_integer_value(diameter));
+  assert(_girth == json_integer_value(girth));
+
+  return 0;
+}
+
+int main(int argc, char *argv[])
+{
+  igraph_t g;
   FILE *ifile;
   json_t *json;
-  json_t *vcount, *ecount, *girth, *diameter, *radius;
   json_error_t error;
 
-  
   ifile = fopen("../Classic/Chvatal/chvatal.gml", "r");
   if (ifile == 0) {
     return 10;
@@ -29,26 +53,9 @@ int main(int argc, char *argv[])
 
   fclose(ifile);
 
-  // Get data from JSON object.
-  vcount = json_object_get(json, "n_vertices");
-  ecount = json_object_get(json, "n_edges");
-  radius = json_object_get(json, "radius");
-  diameter = json_object_get(json, "diameter");
-  girth = json_object_get(json, "girth");
-
-  // Use igraph to compute graph parameters.
-  igraph_radius(&g, &_radius, IGRAPH_ALL);
-  igraph_diameter(&g, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
-  igraph_girth(&g, &_girth, 0);
-
-  // Test all computed parametes match data.
-  assert(igraph_vcount(&g) == json_integer_value(vcount));
-  assert(igraph_ecount(&g) == json_integer_value(ecount));
-  assert(_radius == json_integer_value(radius));
-  assert(_diameter == json_integer_value(diameter));
-  assert(_girth == json_integer_value(girth));
+  test(&g, json);
 
   igraph_destroy(&g);
-  
+
   return 0;
 }
