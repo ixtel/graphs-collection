@@ -51,13 +51,13 @@ int main(int argc, char *argv[])
   json_error_t error;
 
   // Open a graph file in GML format.
-  ifile = fopen("../Classic/Chvatal/chvatal.gml", "r");
+  ifile = fopen("../src/Classic/Chvatal/chvatal.gml", "r");
   if (ifile == 0) {
     return 10;
   }
 
   // Load a JSON file.
-  json = json_load_file("../Classic/Chvatal/chvatal_properties.json", 0, &error);
+  json = json_load_file("../src/Classic/Chvatal/chvatal_properties.json", 0, &error);
   if(!json) {
        /* the error variable contains error information */
   }
