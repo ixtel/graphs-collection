@@ -30,53 +30,53 @@ Classic Graphs
 --------------
 
 1. Chvatal Graph
-([gml](Classic/Chvatal/chvatal.gml), 
-[gexf](Classic/Chvatal/chvatal.gexf), 
-[graphml](Classic/Chvatal/chvatal.graphml),
-[pajek](Classic/Chvatal/chvatal.net))
+([gml](src/Classic/Chvatal/chvatal.gml),
+[gexf](src/Classic/Chvatal/chvatal.gexf),
+[graphml](src/Classic/Chvatal/chvatal.graphml),
+[pajek](src/Classic/Chvatal/chvatal.net))
 2. Desargues Graph
-([gml](Classic/Desargues/desargues.gml),
-[gexf](Classic/Desargues/desargues.gexf),
-[graphml](Classic/Desargues/desargues.graphml),
-[pajek](Classic/Desargues/desargues.net))
+([gml](src/Classic/Desargues/desargues.gml),
+[gexf](src/Classic/Desargues/desargues.gexf),
+[graphml](src/Classic/Desargues/desargues.graphml),
+[pajek](src/Classic/Desargues/desargues.net))
 3. Frucht Graph
-([gml](Classic/Frucht/frucht.gml),
-[gexf](Classic/Frucht/frucht.gexf),
-[graphml](Classic/Frucht/frucht.graphml),
-[pajek](Classic/Frucht/frucht.net))
+([gml](src/Classic/Frucht/frucht.gml),
+[gexf](src/Classic/Frucht/frucht.gexf),
+[graphml](src/Classic/Frucht/frucht.graphml),
+[pajek](src/Classic/Frucht/frucht.net))
 4. Heawood Graph
-([gml](Classic/Heawood/heawood.gml),
-[gexf](Classic/Heawood/heawood.gexf),
-[graphml](Classic/Heawood/heawood.graphml),
-[pajek](Classic/Heawood/heawood.net))
+([gml](src/Classic/Heawood/heawood.gml),
+[gexf](src/Classic/Heawood/heawood.gexf),
+[graphml](src/Classic/Heawood/heawood.graphml),
+[pajek](src/Classic/Heawood/heawood.net))
 5. Petersen Graph
-([gml](Classic/Petersen/petersen.gml),
-[gexf](Classic/Petersen/petersen.gexf),
-[graphml](Classic/Petersen/petersen.graphml),
-[pajek](Classic/Petersen/petersen.net))
+([gml](src/Classic/Petersen/petersen.gml),
+[gexf](src/Classic/Petersen/petersen.gexf),
+[graphml](src/Classic/Petersen/petersen.graphml),
+[pajek](src/Classic/Petersen/petersen.net))
 6. Tutte Graph
-([gml](Classic/Tutte/tutte.gml),
-[gexf](Classic/Tutte/tutte.gexf),
-[graphml](Classic/Tutte/tutte.graphml),
-[pajek](Classic/Tutte/tutte.net))
+([gml](src/Classic/Tutte/tutte.gml),
+[gexf](src/Classic/Tutte/tutte.gexf),
+[graphml](src/Classic/Tutte/tutte.graphml),
+[pajek](src/Classic/Tutte/tutte.net))
 
 Platonic Graphs
 ---------------
 
 7. Icosahedral Graph
-([gml](Platonic/Icosahedral/icosahedral.gml), 
-[gexf](Platonic/Icosahedral/icosahedral.gexf), 
-[graphml](Platonic/Icosahedral/icosahedral.graphml),
-[pajek](Platonic/Icosahedral/icosahedral.net))
+([gml](src/Platonic/Icosahedral/icosahedral.gml),
+[gexf](src/Platonic/Icosahedral/icosahedral.gexf),
+[graphml](src/Platonic/Icosahedral/icosahedral.graphml),
+[pajek](src/Platonic/Icosahedral/icosahedral.net))
 8. Octahedral Graph
-([gml](Platonic/Octahedral/octahedral.gml), 
-[gexf](Platonic/Octahedral/octahedral.gexf), 
-[graphml](Platonic/Octahedral/octahedral.graphml),
-[pajek](Platonic/Octahedral/octahedral.net))
+([gml](src/Platonic/Octahedral/octahedral.gml),
+[gexf](src/Platonic/Octahedral/octahedral.gexf),
+[graphml](src/Platonic/Octahedral/octahedral.graphml),
+[pajek](src/Platonic/Octahedral/octahedral.net))
 9. Tetrahedral Graph
-([gml](Platonic/Tetrahedral/tetrahedral.gml), 
-[gexf](Platonic/Tetrahedral/tetrahedral.gexf), 
-[graphml](Platonic/Tetrahedral/tetrahedral.graphml),
-[pajek](Platonic/Tetrahedral/tetrahedral.net))
+([gml](src/Platonic/Tetrahedral/tetrahedral.gml),
+[gexf](src/Platonic/Tetrahedral/tetrahedral.gexf),
+[graphml](src/Platonic/Tetrahedral/tetrahedral.graphml),
+[pajek](src/Platonic/Tetrahedral/tetrahedral.net))
 
-Last updated: Wed Feb 26 13:59:07 GMT 2014.
+Last updated: Thu Mar 13 21:22:06 GMT 2014.
