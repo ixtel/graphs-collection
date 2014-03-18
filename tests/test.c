@@ -147,8 +147,8 @@ void test_distances(void)
 
 int main(int argc, char *argv[])
 {
- CU_pSuite pSuite = NULL;
- CU_pSuite pSuite2 = NULL;
+ CU_pSuite pSuite_chvatal = NULL;
+ CU_pSuite pSuite_desargues = NULL;
  CU_pSuite pSuite_frucht = NULL;
 
  /* initialize the CUnit test registry */
@@ -156,25 +156,27 @@ int main(int argc, char *argv[])
   return CU_get_error();
 
  /* add a suite to the registry */
- pSuite = CU_add_suite("Chvatal Graph", init_suite_chvatal, clean_suite_chvatal);
- pSuite2 = CU_add_suite("Desargues Graph", init_suite_desargues, clean_suite_desargues);
+ pSuite_chvatal = CU_add_suite("Chvatal Graph", init_suite_chvatal, clean_suite_chvatal);
+ pSuite_desargues = CU_add_suite("Desargues Graph", init_suite_desargues, clean_suite_desargues);
  pSuite_frucht = CU_add_suite("Frucht Graph", init_suite_frucht, clean_suite_frucht);
- if (NULL == pSuite || NULL == pSuite2) {
+ if (NULL == pSuite_chvatal ||
+   NULL == pSuite_desargues ||
+   NULL == pSuite_frucht) {
   CU_cleanup_registry();
   return CU_get_error();
  }
 
  /* add the tests to the suite */
- if ((NULL == CU_add_test(pSuite, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite, "Test distance paramters.", test_distances)))
+ if ((NULL == CU_add_test(pSuite_chvatal, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_chvatal, "Test distance paramters.", test_distances)))
  {
   CU_cleanup_registry();
   return CU_get_error();
  }
 
  /* add the tests to the suite */
- if ((NULL == CU_add_test(pSuite2, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite2, "Test distance paramters.", test_distances)))
+ if ((NULL == CU_add_test(pSuite_desargues, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_desargues, "Test distance paramters.", test_distances)))
  {
   CU_cleanup_registry();
   return CU_get_error();
