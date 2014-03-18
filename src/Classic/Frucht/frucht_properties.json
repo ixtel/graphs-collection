@@ -1,0 +1,8 @@
+{
+  "name": "Frucht Graph",
+  "n_vertices": 12,
+  "n_edges": 18,
+  "radius": 3,
+  "diameter": 4,
+  "girth": 3
+}

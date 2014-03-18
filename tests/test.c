@@ -92,6 +92,46 @@ int clean_suite_desargues(void)
  }
 }
 
+int init_suite_frucht(void)
+{
+ json_error_t error;
+ if (NULL == (i_file = fopen("../src/Classic/Frucht/frucht.gml", "r")) ||
+   (NULL == (json = json_load_file("../src/Classic/Frucht/frucht_properties.json", 0, &error)))) {
+  return -1;
+ }
+
+ else {
+  // Read the graph
+  igraph_read_graph_gml(&g, i_file);
+
+  // Get data from JSON object.
+  vcount = json_object_get(json, "n_vertices");
+  ecount = json_object_get(json, "n_edges");
+  radius = json_object_get(json, "radius");
+  diameter = json_object_get(json, "diameter");
+  girth = json_object_get(json, "girth");
+
+  // Use igraph to compute graph parameters.
+  igraph_radius(&g, &_radius, IGRAPH_ALL);
+  igraph_diameter(&g, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
+  igraph_girth(&g, &_girth, 0);
+
+  return 0;
+ }
+}
+
+int clean_suite_frucht(void)
+{
+ if (0 != fclose(i_file)) {
+  return -1;
+ }
+ else {
+  igraph_destroy(&g);
+  i_file = NULL;
+  return 0;
+ }
+}
+
 void test_basic_parameters(void)
 {
  CU_ASSERT_EQUAL(igraph_vcount(&g), json_integer_value(vcount));
@@ -109,6 +149,7 @@ int main(int argc, char *argv[])
 {
  CU_pSuite pSuite = NULL;
  CU_pSuite pSuite2 = NULL;
+ CU_pSuite pSuite_frucht = NULL;
 
  /* initialize the CUnit test registry */
  if (CUE_SUCCESS != CU_initialize_registry())
@@ -117,6 +158,7 @@ int main(int argc, char *argv[])
  /* add a suite to the registry */
  pSuite = CU_add_suite("Chvatal Graph", init_suite_chvatal, clean_suite_chvatal);
  pSuite2 = CU_add_suite("Desargues Graph", init_suite_desargues, clean_suite_desargues);
+ pSuite_frucht = CU_add_suite("Frucht Graph", init_suite_frucht, clean_suite_frucht);
  if (NULL == pSuite || NULL == pSuite2) {
   CU_cleanup_registry();
   return CU_get_error();
@@ -133,6 +175,14 @@ int main(int argc, char *argv[])
  /* add the tests to the suite */
  if ((NULL == CU_add_test(pSuite2, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite2, "Test distance paramters.", test_distances)))
+ {
+  CU_cleanup_registry();
+  return CU_get_error();
+ }
+
+ /* add the tests to the suite */
+ if ((NULL == CU_add_test(pSuite_frucht, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_frucht, "Test distance paramters.", test_distances)))
  {
   CU_cleanup_registry();
   return CU_get_error();
