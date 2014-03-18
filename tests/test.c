@@ -12,6 +12,24 @@ static igraph_real_t _radius;
 static igraph_integer_t _diameter;
 static igraph_integer_t _girth;
 
+int get_parameter_data() {
+  // Get data from JSON object.
+  vcount = json_object_get(json, "n_vertices");
+  ecount = json_object_get(json, "n_edges");
+  radius = json_object_get(json, "radius");
+  diameter = json_object_get(json, "diameter");
+  girth = json_object_get(json, "girth");
+  return 0;
+}
+
+int compute_distance_parameters() {
+  // Use igraph to compute graph parameters.
+  igraph_radius(&g, &_radius, IGRAPH_ALL);
+  igraph_diameter(&g, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
+  igraph_girth(&g, &_girth, 0);
+  return 0;
+}
+
 int init_suite_chvatal(void)
 {
  json_error_t error;
@@ -21,21 +39,9 @@ int init_suite_chvatal(void)
  }
 
  else {
-  // Read the graph
   igraph_read_graph_gml(&g, i_file);
-
-  // Get data from JSON object.
-  vcount = json_object_get(json, "n_vertices");
-  ecount = json_object_get(json, "n_edges");
-  radius = json_object_get(json, "radius");
-  diameter = json_object_get(json, "diameter");
-  girth = json_object_get(json, "girth");
-
-  // Use igraph to compute graph parameters.
-  igraph_radius(&g, &_radius, IGRAPH_ALL);
-  igraph_diameter(&g, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
-  igraph_girth(&g, &_girth, 0);
-
+  get_parameter_data();
+  compute_distance_parameters();
   return 0;
  }
 }
@@ -61,21 +67,9 @@ int init_suite_desargues(void)
  }
 
  else {
-  // Read the graph
   igraph_read_graph_gml(&g, i_file);
-
-  // Get data from JSON object.
-  vcount = json_object_get(json, "n_vertices");
-  ecount = json_object_get(json, "n_edges");
-  radius = json_object_get(json, "radius");
-  diameter = json_object_get(json, "diameter");
-  girth = json_object_get(json, "girth");
-
-  // Use igraph to compute graph parameters.
-  igraph_radius(&g, &_radius, IGRAPH_ALL);
-  igraph_diameter(&g, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
-  igraph_girth(&g, &_girth, 0);
-
+  get_parameter_data();
+  compute_distance_parameters();
   return 0;
  }
 }
@@ -101,21 +95,9 @@ int init_suite_frucht(void)
  }
 
  else {
-  // Read the graph
   igraph_read_graph_gml(&g, i_file);
-
-  // Get data from JSON object.
-  vcount = json_object_get(json, "n_vertices");
-  ecount = json_object_get(json, "n_edges");
-  radius = json_object_get(json, "radius");
-  diameter = json_object_get(json, "diameter");
-  girth = json_object_get(json, "girth");
-
-  // Use igraph to compute graph parameters.
-  igraph_radius(&g, &_radius, IGRAPH_ALL);
-  igraph_diameter(&g, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
-  igraph_girth(&g, &_girth, 0);
-
+  get_parameter_data();
+  compute_distance_parameters();
   return 0;
  }
 }
