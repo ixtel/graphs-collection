@@ -1,0 +1,8 @@
+{
+  "name": "Petersen Graph",
+  "n_vertices": 10,
+  "n_edges": 15,
+  "radius": 2,
+  "diameter": 2,
+  "girth": 5
+}

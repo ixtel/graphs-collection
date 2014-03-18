@@ -142,6 +142,62 @@ int clean_suite_heawood(void)
  }
 }
 
+int init_suite_petersen(void)
+{
+ json_error_t error;
+ if (NULL == (i_file = fopen("../src/Classic/Petersen/petersen.gml", "r")) ||
+   (NULL == (json = json_load_file("../src/Classic/Petersen/petersen_properties.json", 0, &error)))) {
+  return -1;
+ }
+
+ else {
+  igraph_read_graph_gml(&g, i_file);
+  get_parameter_data();
+  compute_distance_parameters();
+  return 0;
+ }
+}
+
+int clean_suite_petersen(void)
+{
+ if (0 != fclose(i_file)) {
+  return -1;
+ }
+ else {
+  igraph_destroy(&g);
+  i_file = NULL;
+  return 0;
+ }
+}
+
+int init_suite_tutte(void)
+{
+ json_error_t error;
+ if (NULL == (i_file = fopen("../src/Classic/Tutte/tutte.gml", "r")) ||
+   (NULL == (json = json_load_file("../src/Classic/Tutte/tutte_properties.json", 0, &error)))) {
+  return -1;
+ }
+
+ else {
+  igraph_read_graph_gml(&g, i_file);
+  get_parameter_data();
+  compute_distance_parameters();
+  return 0;
+ }
+}
+
+int clean_suite_tutte(void)
+{
+ if (0 != fclose(i_file)) {
+  return -1;
+ }
+ else {
+  igraph_destroy(&g);
+  i_file = NULL;
+  return 0;
+ }
+}
+
 void test_basic_parameters(void)
 {
  CU_ASSERT_EQUAL(igraph_vcount(&g), json_integer_value(vcount));
@@ -161,6 +217,8 @@ int main(int argc, char *argv[])
  CU_pSuite pSuite_desargues = NULL;
  CU_pSuite pSuite_frucht = NULL;
  CU_pSuite pSuite_heawood = NULL;
+ CU_pSuite pSuite_petersen = NULL;
+ CU_pSuite pSuite_tutte = NULL;
 
  /* initialize the CUnit test registry */
  if (CUE_SUCCESS != CU_initialize_registry())
@@ -171,10 +229,15 @@ int main(int argc, char *argv[])
  pSuite_desargues = CU_add_suite("Desargues Graph", init_suite_desargues, clean_suite_desargues);
  pSuite_frucht = CU_add_suite("Frucht Graph", init_suite_frucht, clean_suite_frucht);
  pSuite_heawood = CU_add_suite("Heawood Graph", init_suite_heawood, clean_suite_heawood);
+ pSuite_petersen = CU_add_suite("Petersen Graph", init_suite_petersen, clean_suite_petersen);
+ pSuite_tutte = CU_add_suite("Tutte Graph", init_suite_tutte, clean_suite_tutte);
+
  if (NULL == pSuite_chvatal ||
    NULL == pSuite_desargues ||
    NULL == pSuite_frucht ||
-   NULL == pSuite_heawood) {
+   NULL == pSuite_heawood ||
+   NULL == pSuite_petersen ||
+   NULL == pSuite_tutte) {
   CU_cleanup_registry();
   return CU_get_error();
  }
@@ -210,6 +273,23 @@ int main(int argc, char *argv[])
   CU_cleanup_registry();
   return CU_get_error();
  }
+
+ /* add the tests to the Petersen suite */
+ if ((NULL == CU_add_test(pSuite_petersen, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_petersen, "Test distance paramters.", test_distances)))
+ {
+  CU_cleanup_registry();
+  return CU_get_error();
+ }
+
+ /* add the tests to the Tutte suite */
+ if ((NULL == CU_add_test(pSuite_tutte, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_tutte, "Test distance paramters.", test_distances)))
+ {
+  CU_cleanup_registry();
+  return CU_get_error();
+ }
+
  /* Run all tests using the CUnit Basic interface */
  CU_basic_set_mode(CU_BRM_VERBOSE);
  CU_curses_run_tests();
