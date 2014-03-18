@@ -6,29 +6,40 @@
 
 static FILE* i_file = NULL;
 static json_t *json = NULL;
+static json_t *vcount_e, *ecount_e, *girth_e, *diameter_e, *maxdegree_e, *radius_e;
 static igraph_t g;
-static json_t *vcount, *ecount, *girth, *diameter, *radius;
-static igraph_real_t _radius;
-static igraph_integer_t _diameter;
-static igraph_integer_t _girth;
+static igraph_real_t radius;
+static igraph_integer_t diameter, girth, maxdegree;
 
 int get_parameter_data() {
-  // Get data from JSON object.
-  vcount = json_object_get(json, "n_vertices");
-  ecount = json_object_get(json, "n_edges");
-  radius = json_object_get(json, "radius");
-  diameter = json_object_get(json, "diameter");
-  girth = json_object_get(json, "girth");
-  return 0;
+ // Get data from JSON object.
+ vcount_e = json_object_get(json, "n_vertices");
+ ecount_e = json_object_get(json, "n_edges");
+ radius_e = json_object_get(json, "radius");
+ diameter_e = json_object_get(json, "diameter");
+ girth_e = json_object_get(json, "girth");
+ maxdegree_e = json_object_get(json, "maxdegree");
+ return 0;
+}
+
+int compute_degree_parameters() {
+ igraph_maxdegree(&g, &maxdegree, igraph_vss_all(), IGRAPH_ALL, IGRAPH_NO_LOOPS);
 }
 
 int compute_distance_parameters() {
-  // Use igraph to compute graph parameters.
-  igraph_radius(&g, &_radius, IGRAPH_ALL);
-  igraph_diameter(&g, &_diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
-  igraph_girth(&g, &_girth, 0);
-  return 0;
+ // Use igraph to compute graph parameters.
+ igraph_radius(&g, &radius, IGRAPH_ALL);
+ igraph_diameter(&g, &diameter, 0, 0, 0, IGRAPH_UNDIRECTED, 1);
+ igraph_girth(&g, &girth, 0);
+ return 0;
 }
+
+int compute_all_parameters() {
+ compute_degree_parameters();
+ compute_distance_parameters();
+}
+
+// Chvatal Test Suite
 
 int init_suite_chvatal(void)
 {
@@ -41,7 +52,7 @@ int init_suite_chvatal(void)
  else {
   igraph_read_graph_gml(&g, i_file);
   get_parameter_data();
-  compute_distance_parameters();
+  compute_all_parameters();
   return 0;
  }
 }
@@ -58,6 +69,8 @@ int clean_suite_chvatal(void)
  }
 }
 
+// Desargues Test Suite
+
 int init_suite_desargues(void)
 {
  json_error_t error;
@@ -69,7 +82,7 @@ int init_suite_desargues(void)
  else {
   igraph_read_graph_gml(&g, i_file);
   get_parameter_data();
-  compute_distance_parameters();
+  compute_all_parameters();
   return 0;
  }
 }
@@ -86,6 +99,8 @@ int clean_suite_desargues(void)
  }
 }
 
+// Frucht Test Suite
+
 int init_suite_frucht(void)
 {
  json_error_t error;
@@ -97,7 +112,7 @@ int init_suite_frucht(void)
  else {
   igraph_read_graph_gml(&g, i_file);
   get_parameter_data();
-  compute_distance_parameters();
+  compute_all_parameters();
   return 0;
  }
 }
@@ -114,6 +129,8 @@ int clean_suite_frucht(void)
  }
 }
 
+// Heawood Test Suite
+
 int init_suite_heawood(void)
 {
  json_error_t error;
@@ -125,7 +142,7 @@ int init_suite_heawood(void)
  else {
   igraph_read_graph_gml(&g, i_file);
   get_parameter_data();
-  compute_distance_parameters();
+  compute_all_parameters();
   return 0;
  }
 }
@@ -142,6 +159,8 @@ int clean_suite_heawood(void)
  }
 }
 
+// Petersen Test Suite
+
 int init_suite_petersen(void)
 {
  json_error_t error;
@@ -153,7 +172,7 @@ int init_suite_petersen(void)
  else {
   igraph_read_graph_gml(&g, i_file);
   get_parameter_data();
-  compute_distance_parameters();
+  compute_all_parameters();
   return 0;
  }
 }
@@ -170,6 +189,8 @@ int clean_suite_petersen(void)
  }
 }
 
+// Tutte Test Suite
+
 int init_suite_tutte(void)
 {
  json_error_t error;
@@ -181,7 +202,7 @@ int init_suite_tutte(void)
  else {
   igraph_read_graph_gml(&g, i_file);
   get_parameter_data();
-  compute_distance_parameters();
+  compute_all_parameters();
   return 0;
  }
 }
@@ -198,17 +219,24 @@ int clean_suite_tutte(void)
  }
 }
 
+// Test Functions
+
 void test_basic_parameters(void)
 {
- CU_ASSERT_EQUAL(igraph_vcount(&g), json_integer_value(vcount));
- CU_ASSERT_EQUAL(igraph_ecount(&g), json_integer_value(ecount));
+ CU_ASSERT_EQUAL(igraph_vcount(&g), json_integer_value(vcount_e));
+ CU_ASSERT_EQUAL(igraph_ecount(&g), json_integer_value(ecount_e));
 }
 
-void test_distances(void)
+void test_degree_parameters(void)
 {
- CU_ASSERT_EQUAL(_radius, json_integer_value(radius));
- CU_ASSERT_EQUAL(_diameter, json_integer_value(diameter));
- CU_ASSERT_EQUAL(_girth, json_integer_value(girth));
+ CU_ASSERT_EQUAL(maxdegree, json_integer_value(maxdegree_e));
+}
+
+void test_distance_parameters(void)
+{
+ CU_ASSERT_EQUAL(radius, json_integer_value(radius_e));
+ CU_ASSERT_EQUAL(diameter, json_integer_value(diameter_e));
+ CU_ASSERT_EQUAL(girth, json_integer_value(girth_e));
 }
 
 int main(int argc, char *argv[])
@@ -244,7 +272,8 @@ int main(int argc, char *argv[])
 
  /* add the tests to the Chvatal suite */
  if ((NULL == CU_add_test(pSuite_chvatal, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite_chvatal, "Test distance paramters.", test_distances)))
+   (NULL == CU_add_test(pSuite_chvatal, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_chvatal, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -252,7 +281,8 @@ int main(int argc, char *argv[])
 
  /* add the tests to the Desargues suite */
  if ((NULL == CU_add_test(pSuite_desargues, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite_desargues, "Test distance paramters.", test_distances)))
+   (NULL == CU_add_test(pSuite_desargues, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_desargues, "Test distance paramters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -260,7 +290,8 @@ int main(int argc, char *argv[])
 
  /* add the tests to the Frucht suite */
  if ((NULL == CU_add_test(pSuite_frucht, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite_frucht, "Test distance paramters.", test_distances)))
+   (NULL == CU_add_test(pSuite_frucht, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_frucht, "Test distance paramters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -268,7 +299,8 @@ int main(int argc, char *argv[])
 
  /* add the tests to the Heawood suite */
  if ((NULL == CU_add_test(pSuite_heawood, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite_heawood, "Test distance paramters.", test_distances)))
+   (NULL == CU_add_test(pSuite_heawood, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_heawood, "Test distance paramters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -276,7 +308,8 @@ int main(int argc, char *argv[])
 
  /* add the tests to the Petersen suite */
  if ((NULL == CU_add_test(pSuite_petersen, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite_petersen, "Test distance paramters.", test_distances)))
+   (NULL == CU_add_test(pSuite_petersen, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_petersen, "Test distance paramters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -284,7 +317,8 @@ int main(int argc, char *argv[])
 
  /* add the tests to the Tutte suite */
  if ((NULL == CU_add_test(pSuite_tutte, "Test basic parameters.", test_basic_parameters)) ||
-   (NULL == CU_add_test(pSuite_tutte, "Test distance paramters.", test_distances)))
+   (NULL == CU_add_test(pSuite_tutte, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_tutte, "Test distance paramters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();

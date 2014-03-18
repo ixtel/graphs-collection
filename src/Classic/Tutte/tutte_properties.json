@@ -4,5 +4,6 @@
   "n_edges": 69,
   "radius": 5,
   "diameter": 8,
-  "girth": 4
+  "girth": 4,
+  "maxdegree": 3
 }
