@@ -6,4 +6,4 @@ CFLAGS=-I/usr/local/include/igraph\
 	   -lcunit
 
 test: test.c
-	$(CC) $(CFLAGS) -o test test.c
+	$(CC) $(CFLAGS) -o $@ $<

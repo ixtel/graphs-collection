@@ -23,7 +23,9 @@ int get_parameter_data() {
 }
 
 int compute_degree_parameters() {
+ // Use igraph to compute degree parameters.
  igraph_maxdegree(&g, &maxdegree, igraph_vss_all(), IGRAPH_ALL, IGRAPH_NO_LOOPS);
+ return 0;
 }
 
 int compute_distance_parameters() {
@@ -37,6 +39,7 @@ int compute_distance_parameters() {
 int compute_all_parameters() {
  compute_degree_parameters();
  compute_distance_parameters();
+ return 0;
 }
 
 // Chvatal Test Suite
@@ -282,7 +285,7 @@ int main(int argc, char *argv[])
  /* add the tests to the Desargues suite */
  if ((NULL == CU_add_test(pSuite_desargues, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite_desargues, "Test degree parameters.", test_degree_parameters)) ||
-   (NULL == CU_add_test(pSuite_desargues, "Test distance paramters.", test_distance_parameters)))
+   (NULL == CU_add_test(pSuite_desargues, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -291,7 +294,7 @@ int main(int argc, char *argv[])
  /* add the tests to the Frucht suite */
  if ((NULL == CU_add_test(pSuite_frucht, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite_frucht, "Test degree parameters.", test_degree_parameters)) ||
-   (NULL == CU_add_test(pSuite_frucht, "Test distance paramters.", test_distance_parameters)))
+   (NULL == CU_add_test(pSuite_frucht, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -300,7 +303,7 @@ int main(int argc, char *argv[])
  /* add the tests to the Heawood suite */
  if ((NULL == CU_add_test(pSuite_heawood, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite_heawood, "Test degree parameters.", test_degree_parameters)) ||
-   (NULL == CU_add_test(pSuite_heawood, "Test distance paramters.", test_distance_parameters)))
+   (NULL == CU_add_test(pSuite_heawood, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -309,7 +312,7 @@ int main(int argc, char *argv[])
  /* add the tests to the Petersen suite */
  if ((NULL == CU_add_test(pSuite_petersen, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite_petersen, "Test degree parameters.", test_degree_parameters)) ||
-   (NULL == CU_add_test(pSuite_petersen, "Test distance paramters.", test_distance_parameters)))
+   (NULL == CU_add_test(pSuite_petersen, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
@@ -318,7 +321,7 @@ int main(int argc, char *argv[])
  /* add the tests to the Tutte suite */
  if ((NULL == CU_add_test(pSuite_tutte, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite_tutte, "Test degree parameters.", test_degree_parameters)) ||
-   (NULL == CU_add_test(pSuite_tutte, "Test distance paramters.", test_distance_parameters)))
+   (NULL == CU_add_test(pSuite_tutte, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
