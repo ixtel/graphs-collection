@@ -107,8 +107,8 @@ int clean_suite_desargues(void)
 int init_suite_dodecahedron(void)
 {
  json_error_t error;
- if (NULL == (i_file = fopen("../src/Platonic/Dodecahedron/dodecahedron.gml", "r")) ||
-   (NULL == (json = json_load_file("../src/Platonic/Dodecahedron/dodecahedron_properties.json", 0, &error)))) {
+ if (NULL == (i_file = fopen("../src/Platonic/Dodecahedral/dodecahedral.gml", "r")) ||
+   (NULL == (json = json_load_file("../src/Platonic/Dodecahedral/dodecahedral_properties.json", 0, &error)))) {
   return -1;
  }
 
