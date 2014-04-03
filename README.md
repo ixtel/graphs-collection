@@ -67,7 +67,7 @@ Platonic Graphs
 ---------------
 
 7. Dodecahedral Graph
-([gv](src/Platonic/Dodecahedral/dodecahedral.gv),
+([dot](src/Platonic/Dodecahedral/dodecahedral.gv),
 [gml](src/Platonic/Dodecahedral/dodecahedral.gml),
 [gexf](src/Platonic/Dodecahedral/dodecahedral.gexf),
 [graphml](src/Platonic/Dodecahedral/dodecahedral.graphml),
