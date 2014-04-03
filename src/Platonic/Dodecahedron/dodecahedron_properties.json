@@ -1,0 +1,9 @@
+{
+  "name": "Dodecahedron Graph",
+  "n_vertices": 20,
+  "n_edges": 30,
+  "radius": 5,
+  "diameter": 5,
+  "girth": 5,
+  "maxdegree": 3
+}

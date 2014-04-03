@@ -102,6 +102,35 @@ int clean_suite_desargues(void)
  }
 }
 
+// Dodecahedron Test Suite
+
+int init_suite_dodecahedron(void)
+{
+ json_error_t error;
+ if (NULL == (i_file = fopen("../src/Platonic/Dodecahedron/dodecahedron.gml", "r")) ||
+   (NULL == (json = json_load_file("../src/Platonic/Dodecahedron/dodecahedron_properties.json", 0, &error)))) {
+  return -1;
+ }
+
+ else {
+  igraph_read_graph_gml(&g, i_file);
+  get_parameter_data();
+  compute_all_parameters();
+  return 0;
+ }
+}
+
+int clean_suite_dodecahedron(void)
+{
+ if (0 != fclose(i_file)) {
+  return -1;
+ }
+ else {
+  igraph_destroy(&g);
+  i_file = NULL;
+  return 0;
+ }
+}
 // Frucht Test Suite
 
 int init_suite_frucht(void)
@@ -246,6 +275,7 @@ int main(int argc, char *argv[])
 {
  CU_pSuite pSuite_chvatal = NULL;
  CU_pSuite pSuite_desargues = NULL;
+ CU_pSuite pSuite_dodecahedron = NULL;
  CU_pSuite pSuite_frucht = NULL;
  CU_pSuite pSuite_heawood = NULL;
  CU_pSuite pSuite_petersen = NULL;
@@ -258,6 +288,7 @@ int main(int argc, char *argv[])
  /* add a suite to the registry */
  pSuite_chvatal = CU_add_suite("Chvatal Graph", init_suite_chvatal, clean_suite_chvatal);
  pSuite_desargues = CU_add_suite("Desargues Graph", init_suite_desargues, clean_suite_desargues);
+ pSuite_dodecahedron = CU_add_suite("Dodecahedron Graph", init_suite_dodecahedron, clean_suite_dodecahedron);
  pSuite_frucht = CU_add_suite("Frucht Graph", init_suite_frucht, clean_suite_frucht);
  pSuite_heawood = CU_add_suite("Heawood Graph", init_suite_heawood, clean_suite_heawood);
  pSuite_petersen = CU_add_suite("Petersen Graph", init_suite_petersen, clean_suite_petersen);
@@ -265,6 +296,7 @@ int main(int argc, char *argv[])
 
  if (NULL == pSuite_chvatal ||
    NULL == pSuite_desargues ||
+   NULL == pSuite_dodecahedron ||
    NULL == pSuite_frucht ||
    NULL == pSuite_heawood ||
    NULL == pSuite_petersen ||
@@ -286,6 +318,15 @@ int main(int argc, char *argv[])
  if ((NULL == CU_add_test(pSuite_desargues, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite_desargues, "Test degree parameters.", test_degree_parameters)) ||
    (NULL == CU_add_test(pSuite_desargues, "Test distance parameters.", test_distance_parameters)))
+ {
+  CU_cleanup_registry();
+  return CU_get_error();
+ }
+
+ /* add the tests to the Dodecahedron suite */
+ if ((NULL == CU_add_test(pSuite_dodecahedron, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_dodecahedron, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_dodecahedron, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();
