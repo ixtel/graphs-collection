@@ -1,29 +1,9 @@
-pangraph=$(HOME)/workspace/pangraph/src/pangraph
+dodecahedral := src/Platonic/Dodecahedral
 
-src_dir=$(HOME)/workspace/graphs-collection/src
+.PHONY: all $(dodecahedral)
 
-dodecahedral_graphs=$(src_dir)/Platonic/Dodecahedral/dodecahedral.gexf\
-                    $(src_dir)/Platonic/Dodecahedral/dodecahedral.net
+all: $(dodecahedral)
 
-icosahedral_graphs=$(src_dir)/Platonic/Icosahedral/icosahedral.gexf\
-                   $(src_dir)/Platonic/Icosahedral/icosahedral.net
+$(dodecahedral):
+	$(MAKE) --directory=$@ $(TARGET)
 
-all: platonic_graphs
-
-platonic_graphs: $(dodecahedral_graphs) $(icosahedral_graphs)
-
-$(src_dir)/Platonic/Dodecahedral/dodecahedral.gexf:
-	$(pangraph) --type gexf --name dodecahedral -o $@
-
-$(src_dir)/Platonic/Dodecahedral/dodecahedral.net:
-	$(pangraph) --type pajek --name dodecahedral -o $@
-
-$(src_dir)/Platonic/Icosahedral/icosahedral.gexf:
-	$(pangraph) --type gexf --name icosahedral -o $@
-
-$(src_dir)/Platonic/Icosahedral/icosahedral.net:
-	$(pangraph) --type pajek --name icosahedral -o $@
-
-clean:
-	rm -f $(dodecahedral_graphs)
-	rm -f $(icosahedral_graphs)
