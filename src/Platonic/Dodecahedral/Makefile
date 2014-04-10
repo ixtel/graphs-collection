@@ -1,9 +1,7 @@
 dodecahedral_graphs=dodecahedral.gexf\
                     dodecahedral.net
 
-all: platonic_graphs
-
-platonic_graphs: $(dodecahedral_graphs)
+all: $(dodecahedral_graphs)
 
 OPTIONS=--name dodecahedral
 

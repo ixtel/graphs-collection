@@ -2,11 +2,12 @@ export
 
 pangraph=$(HOME)/workspace/pangraph/src/pangraph
 
-dodecahedral := src/Platonic/Dodecahedral
+platonic := src/Platonic/Dodecahedral\
+            src/Platonic/Icosahedral
 
-.PHONY: all $(dodecahedral)
+.PHONY: all $(platonic)
 
-all: $(dodecahedral)
+all: $(platonic)
 
-$(dodecahedral):
+$(platonic):
 	$(MAKE) --directory=$@ $(TARGET)
