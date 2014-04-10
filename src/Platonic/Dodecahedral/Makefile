@@ -1,6 +1,8 @@
 include ../../../rules.mk
 
 dodecahedral_graphs=dodecahedral.gexf\
+                    dodecahedral.gml\
+                    dodecahedral.graphml\
                     dodecahedral.net
 
 all: $(dodecahedral_graphs)

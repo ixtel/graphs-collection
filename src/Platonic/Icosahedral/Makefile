@@ -1,7 +1,9 @@
 include ../../../rules.mk
 
 icosahedral_graphs=icosahedral.gexf\
-                    icosahedral.net
+                   icosahedral.gml\
+                   icosahedral.graphml\
+                   icosahedral.net
 
 all: $(icosahedral_graphs)
 
