@@ -3,6 +3,7 @@ include ../../../rules.mk
 desargues_graphs=desargues.gexf\
                  desargues.gml\
                  desargues.graphml\
+                 desargues.gv\
                  desargues.net
 
 all: $(desargues_graphs)

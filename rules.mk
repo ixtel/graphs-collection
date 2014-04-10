@@ -8,6 +8,9 @@
 %.graphml:
 	$(pangraph) --type graphml $(OPTIONS) -o $@
 
+%.gv: %.gml
+	gml2gv $< -o $@
+
 %.net:
 	$(pangraph) --type pajek $(OPTIONS) -o $@
 

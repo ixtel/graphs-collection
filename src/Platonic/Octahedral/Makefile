@@ -3,6 +3,7 @@ include ../../../rules.mk
 octahedral_graphs=octahedral.gexf\
                   octahedral.gml\
                   octahedral.graphml\
+                  octahedral.gv\
                   octahedral.net
 
 all: $(octahedral_graphs)

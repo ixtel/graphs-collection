@@ -3,6 +3,7 @@ include ../../../rules.mk
 frucht_graphs=frucht.gexf\
               frucht.gml\
               frucht.graphml\
+              frucht.gv\
               frucht.net
 
 all: $(frucht_graphs)
