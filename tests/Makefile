@@ -10,3 +10,6 @@ check: test
 
 test: test.c
 	$(CC) $(CFLAGS) -o $@ $<
+
+clean:
+	rm -f test

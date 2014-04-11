@@ -2,6 +2,8 @@ export
 
 pangraph=$(HOME)/workspace/pangraph/src/pangraph
 
+test_folder=./tests
+
 classic := src/Classic/Chvatal\
            src/Classic/Desargues\
            src/Classic/Frucht\
@@ -19,7 +21,10 @@ platonic := src/Platonic/Dodecahedral\
 all: $(platonic) $(classic)
 
 check:
-	$(MAKE) --directory=./tests check
+	$(MAKE) --directory=$(test_folder) check
+
+clean_test:
+	$(MAKE) --directory=$(test_folder) clean
 
 $(platonic) $(classic):
 	$(MAKE) --directory=$@ $(TARGET)
