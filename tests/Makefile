@@ -5,5 +5,8 @@ CFLAGS=-I/usr/local/include/igraph\
 	   -ljansson\
 	   -lcunit
 
+check: test
+	./test
+
 test: test.c
 	$(CC) $(CFLAGS) -o $@ $<

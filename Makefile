@@ -14,9 +14,12 @@ platonic := src/Platonic/Dodecahedral\
             src/Platonic/Octahedral\
             src/Platonic/Tetrahedral
 
-.PHONY: all $(platonic) $(classic)
+.PHONY: all check $(platonic) $(classic)
 
 all: $(platonic) $(classic)
+
+check:
+	$(MAKE) --directory=./tests check
 
 $(platonic) $(classic):
 	$(MAKE) --directory=$@ $(TARGET)
