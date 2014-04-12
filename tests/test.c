@@ -191,6 +191,36 @@ int clean_suite_heawood(void)
  }
 }
 
+// Pappus Test Suite
+
+int init_suite_pappus(void)
+{
+ json_error_t error;
+ if (NULL == (i_file = fopen("../src/Classic/Pappus/pappus.gml", "r")) ||
+   (NULL == (json = json_load_file("../src/Classic/Pappus/pappus_properties.json", 0, &error)))) {
+  return -1;
+ }
+
+ else {
+  igraph_read_graph_gml(&g, i_file);
+  get_parameter_data();
+  compute_all_parameters();
+  return 0;
+ }
+}
+
+int clean_suite_pappus(void)
+{
+ if (0 != fclose(i_file)) {
+  return -1;
+ }
+ else {
+  igraph_destroy(&g);
+  i_file = NULL;
+  return 0;
+ }
+}
+
 // Petersen Test Suite
 
 int init_suite_petersen(void)
@@ -278,6 +308,7 @@ int main(int argc, char *argv[])
  CU_pSuite pSuite_dodecahedron = NULL;
  CU_pSuite pSuite_frucht = NULL;
  CU_pSuite pSuite_heawood = NULL;
+ CU_pSuite pSuite_pappus = NULL;
  CU_pSuite pSuite_petersen = NULL;
  CU_pSuite pSuite_tutte = NULL;
 
@@ -291,6 +322,7 @@ int main(int argc, char *argv[])
  pSuite_dodecahedron = CU_add_suite("Dodecahedron Graph", init_suite_dodecahedron, clean_suite_dodecahedron);
  pSuite_frucht = CU_add_suite("Frucht Graph", init_suite_frucht, clean_suite_frucht);
  pSuite_heawood = CU_add_suite("Heawood Graph", init_suite_heawood, clean_suite_heawood);
+ pSuite_pappus = CU_add_suite("Pappus Graph", init_suite_pappus, clean_suite_pappus);
  pSuite_petersen = CU_add_suite("Petersen Graph", init_suite_petersen, clean_suite_petersen);
  pSuite_tutte = CU_add_suite("Tutte Graph", init_suite_tutte, clean_suite_tutte);
 
@@ -299,6 +331,7 @@ int main(int argc, char *argv[])
    NULL == pSuite_dodecahedron ||
    NULL == pSuite_frucht ||
    NULL == pSuite_heawood ||
+   NULL == pSuite_pappus ||
    NULL == pSuite_petersen ||
    NULL == pSuite_tutte) {
   CU_cleanup_registry();
@@ -345,6 +378,15 @@ int main(int argc, char *argv[])
  if ((NULL == CU_add_test(pSuite_heawood, "Test basic parameters.", test_basic_parameters)) ||
    (NULL == CU_add_test(pSuite_heawood, "Test degree parameters.", test_degree_parameters)) ||
    (NULL == CU_add_test(pSuite_heawood, "Test distance parameters.", test_distance_parameters)))
+ {
+  CU_cleanup_registry();
+  return CU_get_error();
+ }
+
+ /* add the tests to the Pappus suite */
+ if ((NULL == CU_add_test(pSuite_pappus, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_pappus, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_pappus, "Test distance parameters.", test_distance_parameters)))
  {
   CU_cleanup_registry();
   return CU_get_error();

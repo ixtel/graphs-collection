@@ -8,6 +8,7 @@ classic := src/Classic/Chvatal\
            src/Classic/Desargues\
            src/Classic/Frucht\
            src/Classic/Heawood\
+           src/Classic/Pappus\
            src/Classic/Petersen\
            src/Classic/Tutte\
 

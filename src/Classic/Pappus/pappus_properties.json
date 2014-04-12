@@ -1,0 +1,9 @@
+{
+  "name": "Pappus Graph",
+  "n_vertices": 18,
+  "n_edges": 27,
+  "radius": 4,
+  "diameter": 4,
+  "girth": 6,
+  "maxdegree": 3
+}
