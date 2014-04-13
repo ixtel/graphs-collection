@@ -4,7 +4,8 @@ pangraph=$(HOME)/workspace/pangraph/src/pangraph
 
 test_folder=./tests
 
-classic := src/Classic/Chvatal\
+classic := src/Classic/Bull\
+           src/Classic/Chvatal\
            src/Classic/Desargues\
            src/Classic/Frucht\
            src/Classic/Heawood\

@@ -1,0 +1,9 @@
+{
+  "name": "Bull Graph",
+  "n_vertices": 5,
+  "n_edges": 5,
+  "radius": 2,
+  "diameter": 3,
+  "girth": 3,
+  "maxdegree": 3
+}

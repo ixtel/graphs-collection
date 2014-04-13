@@ -42,6 +42,36 @@ int compute_all_parameters() {
  return 0;
 }
 
+// Bull Test Suite
+
+int init_suite_bull(void)
+{
+ json_error_t error;
+ if (NULL == (i_file = fopen("../src/Classic/Bull/bull.gml", "r")) ||
+   (NULL == (json = json_load_file("../src/Classic/Bull/bull_properties.json", 0, &error)))) {
+  return -1;
+ }
+
+ else {
+  igraph_read_graph_gml(&g, i_file);
+  get_parameter_data();
+  compute_all_parameters();
+  return 0;
+ }
+}
+
+int clean_suite_bull(void)
+{
+ if (0 != fclose(i_file)) {
+  return -1;
+ }
+ else {
+  igraph_destroy(&g);
+  i_file = NULL;
+  return 0;
+ }
+}
+
 // Chvatal Test Suite
 
 int init_suite_chvatal(void)
@@ -303,6 +333,7 @@ void test_distance_parameters(void)
 
 int main(int argc, char *argv[])
 {
+ CU_pSuite pSuite_bull = NULL;
  CU_pSuite pSuite_chvatal = NULL;
  CU_pSuite pSuite_desargues = NULL;
  CU_pSuite pSuite_dodecahedron = NULL;
@@ -317,6 +348,7 @@ int main(int argc, char *argv[])
   return CU_get_error();
 
  /* add a suite to the registry */
+ pSuite_bull = CU_add_suite("Bull Graph", init_suite_bull, clean_suite_bull);
  pSuite_chvatal = CU_add_suite("Chvatal Graph", init_suite_chvatal, clean_suite_chvatal);
  pSuite_desargues = CU_add_suite("Desargues Graph", init_suite_desargues, clean_suite_desargues);
  pSuite_dodecahedron = CU_add_suite("Dodecahedron Graph", init_suite_dodecahedron, clean_suite_dodecahedron);
@@ -326,7 +358,8 @@ int main(int argc, char *argv[])
  pSuite_petersen = CU_add_suite("Petersen Graph", init_suite_petersen, clean_suite_petersen);
  pSuite_tutte = CU_add_suite("Tutte Graph", init_suite_tutte, clean_suite_tutte);
 
- if (NULL == pSuite_chvatal ||
+ if (NULL == pSuite_bull ||
+   NULL == pSuite_chvatal ||
    NULL == pSuite_desargues ||
    NULL == pSuite_dodecahedron ||
    NULL == pSuite_frucht ||
@@ -334,6 +367,15 @@ int main(int argc, char *argv[])
    NULL == pSuite_pappus ||
    NULL == pSuite_petersen ||
    NULL == pSuite_tutte) {
+  CU_cleanup_registry();
+  return CU_get_error();
+ }
+
+ /* add the tests to the Bull suite */
+ if ((NULL == CU_add_test(pSuite_bull, "Test basic parameters.", test_basic_parameters)) ||
+   (NULL == CU_add_test(pSuite_bull, "Test degree parameters.", test_degree_parameters)) ||
+   (NULL == CU_add_test(pSuite_bull, "Test distance parameters.", test_distance_parameters)))
+ {
   CU_cleanup_registry();
   return CU_get_error();
  }
