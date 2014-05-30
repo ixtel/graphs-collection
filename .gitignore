@@ -10,3 +10,6 @@ tests/test
 
 # Built documentation
 doc/output
+
+# External Graph Collections
+External
