@@ -2,6 +2,7 @@ export
 
 pangraph=$(HOME)/workspace/pangraph/src/pangraph
 
+external_folder=./External
 test_folder=./tests
 
 classic := src/Classic/Bull\
@@ -27,6 +28,9 @@ check:
 
 clean_test:
 	$(MAKE) --directory=$(test_folder) clean
+
+external:
+	$(MAKE) --directory=$(external_folder) all
 
 $(platonic) $(classic):
 	$(MAKE) --directory=$@ $(TARGET)
