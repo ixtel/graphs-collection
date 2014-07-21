@@ -1,6 +1,4 @@
-colouring_dir:=./Colouring
-
-trick_dir:=$(colouring_dir)/Trick
+trick_dir:=./Trick
 trick_url:=http://mat.gsia.cmu.edu/COLOR/instances
 
 trick_graphs:=\
