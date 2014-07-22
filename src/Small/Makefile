@@ -1,4 +1,5 @@
 output_folder:=./output
+
 src_folder:=~/workspace/graphs-collection/External/BDM/Simple
 
 g6sources:=$(src_folder)/graph2.g6\
@@ -9,6 +10,12 @@ g6sources:=$(src_folder)/graph2.g6\
            $(src_folder)/graph7.g6\
            $(src_folder)/graph8.g6\
            $(src_folder)/graph9.g6\
+           $(src_folder)/graph3c.g6\
+           $(src_folder)/graph4c.g6\
+           $(src_folder)/graph5c.g6\
+           $(src_folder)/graph6c.g6\
+           $(src_folder)/graph7c.g6\
+           $(src_folder)/graph8c.g6\
 
 dimacs_file_names:=$(subst g6,dimacs,$(subst graph,,$(notdir $(g6sources))))
 dimacs_folder_names:=$(subst .,_,$(dimacs_file_names))
