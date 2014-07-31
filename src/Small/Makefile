@@ -10,12 +10,14 @@ g6sources:=$(src_folder)/graph2.g6\
            $(src_folder)/graph7.g6\
            $(src_folder)/graph8.g6\
            $(src_folder)/graph9.g6\
+           $(src_folder)/graph2c.g6\
            $(src_folder)/graph3c.g6\
            $(src_folder)/graph4c.g6\
            $(src_folder)/graph5c.g6\
            $(src_folder)/graph6c.g6\
            $(src_folder)/graph7c.g6\
            $(src_folder)/graph8c.g6\
+           $(src_folder)/graph9c.g6\
 
 dimacs_file_names:=$(subst g6,dimacs,$(subst graph,,$(notdir $(g6sources))))
 dimacs_folder_names:=$(subst .,_,$(dimacs_file_names))
@@ -29,15 +31,15 @@ gv_folder_names:=$(subst .,_,$(gv_file_names))
 gv_file_paths:=$(addprefix $(output_folder)/, $(gv_file_names))
 gv_folder_paths:=$(addprefix $(output_folder)/, $(gv_folder_names))
 
-.PHONY: all clean dimacs
+.PHONY: all clean dimacs gv clean_dimacs clean_gv
 
 all: dimacs gv
+
+clean: clean_dimacs clean_gv
 
 dimacs: $(dimacs_folder_paths)
 
 gv: $(gv_folder_paths)
-
-clean: clean_dimacs clean_gv
 
 clean_dimacs:
 	rm -rf $(dimacs_file_paths)
@@ -48,7 +50,7 @@ clean_gv:
 	rm -rf $(gv_folder_paths)
 
 $(dimacs_file_paths): $(output_folder)/%.dimacs: $(src_folder)/graph%.g6
-	listg -e $< | awk -f e2dimacs.awk > $@
+	listg -b $< > $@
 
 $(dimacs_folder_paths): $(output_folder)/%_dimacs: $(output_folder)/%.dimacs
 	mkdir -p $@;\
@@ -56,9 +58,9 @@ $(dimacs_folder_paths): $(output_folder)/%_dimacs: $(output_folder)/%.dimacs
 	awk -f dimacs_split.awk ../../$<
 
 $(gv_file_paths): $(output_folder)/%.gv: $(src_folder)/graph%.g6
-	listg -e $< | awk -f e2gv.awk > $@
+	listg -y $< > $@
 
 $(gv_folder_paths): $(output_folder)/%_gv: $(output_folder)/%.gv
 	mkdir -p $@;\
 	cd $@;\
-	awk -f gv_split.awk ../../$<
+	csplit -z -b '%d.gv' -f '' ../../$< '/^graph.*/' '{*}'
