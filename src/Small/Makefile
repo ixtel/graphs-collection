@@ -63,4 +63,4 @@ $(gv_file_paths): $(output_folder)/%.gv: $(src_folder)/graph%.g6
 $(gv_folder_paths): $(output_folder)/%_gv: $(output_folder)/%.gv
 	mkdir -p $@;\
 	cd $@;\
-	csplit -z -b '%d.gv' -f '' ../../$< '/^graph.*/' '{*}'
+	csplit -sz -b '%d.gv' -f '' ../../$< '/^graph.*/' '{*}'
