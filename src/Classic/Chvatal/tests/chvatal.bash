@@ -17,3 +17,5 @@ chvatal_gv_computed_maxdeg=$(gv_maxdeg $chvatal_gv_path)
 
 chvatal_g6_computed_diameter=$(g6_diameter $chvatal_g6_path)
 chvatal_g6_computed_girth=$(g6_girth $chvatal_g6_path)
+chvatal_g6_computed_order=$(g6_order $chvatal_g6_path)
+chvatal_g6_computed_size=$(g6_size $chvatal_g6_path)

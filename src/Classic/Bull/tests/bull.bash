@@ -18,3 +18,5 @@ bull_gv_computed_maxdeg=$(gv_maxdeg $bull_gv_path)
 
 bull_g6_computed_diameter=$(g6_diameter $bull_g6_path)
 bull_g6_computed_girth=$(g6_girth $bull_g6_path)
+bull_g6_computed_order=$(g6_order $bull_g6_path)
+bull_g6_computed_size=$(g6_size $bull_g6_path)
