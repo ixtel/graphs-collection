@@ -14,3 +14,9 @@
   [ "$bull_gv_computed_chi" -eq $bull_expected_chi ]
 }
 
+@test "Bull graph: Distance." {
+  load ../../graphs
+  load bull
+  [ "$bull_g6_computed_diameter" -eq $bull_expected_diameter ]
+  [ "$bull_g6_computed_girth" -eq $bull_expected_girth ]
+}
