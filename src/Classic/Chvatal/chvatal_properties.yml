@@ -1,0 +1,10 @@
+---
+name: "Chvatal Graph"
+chromatic-number: 4
+diameter: 2
+girth: 4
+max-degree: 4
+order: 12
+radius: 2
+size: 24
+...
