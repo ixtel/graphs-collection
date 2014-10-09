@@ -5,6 +5,13 @@ get_property() {
 }
 
 gv_chromatic() { chromatic $1; }
+
 gv_order() { gc -n $1 | awk '{ print $1 }'; }
+
 gv_size() { gc -e $1 | awk '{ print $1 }'; }
+
 gv_maxdeg() { cat $1 | gvpr -fmaxdeg | sed -n 's/max degree = \([0-9]*\).*/\1/p'; }
+
+g6_girth() { cat $1 | girth.py; }
+
+g6_diameter() { cat $1 | diameter.py; }
