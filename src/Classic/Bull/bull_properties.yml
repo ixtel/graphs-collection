@@ -1,0 +1,10 @@
+---
+name: "Bull Graph"
+chromatic-number: 3
+diameter: 3
+girth: 3
+max-degree: 3
+order: 5
+radius: 2
+size: 5
+...
