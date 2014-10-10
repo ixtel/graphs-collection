@@ -29,6 +29,10 @@ check:
 clean_test:
 	$(MAKE) --directory=$(test_folder) clean
 
+test:
+	bats ./src/Classic/Bull/tests/*.bats
+	bats ./src/Classic/Chvatal/tests/*.bats
+
 external:
 	$(MAKE) --directory=$(external_folder) all
 
