@@ -1,5 +1,7 @@
 OUTPUT=./output
 
+.PHONY: all html pdf
+
 all: html pdf
 
 html: $(OUTPUT)/tutorial.html
