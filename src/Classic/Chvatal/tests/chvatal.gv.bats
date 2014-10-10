@@ -5,16 +5,16 @@ setup() {
   load chvatal
 }
 
-@test "Chvatal graph: Graphviz. maxdeg" {
+@test "Chvatal graph -> DOT -> chi" {
+  [ "$chvatal_gv_computed_chi" -eq $chvatal_expected_chi ]
+}
+@test "Chvatal graph -> DOT -> maxdeg" {
   [ "$chvatal_gv_computed_maxdeg" -eq $chvatal_expected_maxdeg ]
 }
-@test "Chvatal graph: Graphviz. order" {
+@test "Chvatal graph -> DOT -> order" {
   [ "$chvatal_gv_computed_order" -eq $chvatal_expected_order ]
 }
-@test "Chvatal graph: Graphviz. size" {
+@test "Chvatal graph -> DOT -> size" {
   [ "$chvatal_gv_computed_size" -eq $chvatal_expected_size ]
-}
-@test "Chvatal graph: Graphviz. chi" {
-  [ "$chvatal_gv_computed_chi" -eq $chvatal_expected_chi ]
 }
 
