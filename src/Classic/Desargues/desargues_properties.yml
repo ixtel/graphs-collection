@@ -1,0 +1,10 @@
+---
+name: "Desargues Graph"
+chromatic-number: 2
+diameter: 5
+girth: 6
+max-degree: 3
+order: 20
+radius: 5
+size: 30
+...
