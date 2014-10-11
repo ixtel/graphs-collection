@@ -1,0 +1,15 @@
+---
+name: "Petersen Graph"
+order: 10
+size: 15
+chromatic-number: 3
+chromatic-index: 4
+diameter: 2
+edge-connectivity: 4
+girth: 5
+independence-number: 4
+max-degree: 3
+radius: 2
+spectrum: $$\{3, 1^{5}, -2^{4}\}$$
+vertex-connectivity: 3
+...
