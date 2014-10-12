@@ -32,6 +32,9 @@ clean_test:
 test:
 	bats ./src/Classic/Bull/tests/*.bats
 	bats ./src/Classic/Chvatal/tests/*.bats
+	bats ./src/Classic/Desargues/tests/*.bats
+	bats ./src/Classic/Frucht/tests/*.bats
+	bats ./src/Classic/Petersen/tests/*.bats
 
 external:
 	$(MAKE) --directory=$(external_folder) all
