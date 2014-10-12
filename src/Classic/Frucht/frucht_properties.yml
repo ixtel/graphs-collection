@@ -1,0 +1,8 @@
+name: "Frucht Graph"
+chromatic-number: 3
+diameter: 4
+girth: 3
+max-degree: 3
+order: 12
+radius: 3
+size: 18
