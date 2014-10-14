@@ -1,0 +1,8 @@
+name: "Heawood Graph"
+chromatic-number: 2
+diameter: 3
+girth: 6
+max-degree: 3
+order: 14
+radius: 3
+size: 21
