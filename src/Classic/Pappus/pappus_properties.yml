@@ -1,0 +1,8 @@
+name: "Pappus Graph"
+chromatic-number: 2
+diameter: 4
+girth: 6
+max-degree: 3
+order: 18
+radius: 4
+size: 27
