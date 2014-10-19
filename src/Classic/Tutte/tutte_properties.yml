@@ -1,0 +1,7 @@
+name: "Tutte Graph",
+diameter: 8
+girth: 4
+max-degree: 3
+order: 46
+radius: 5
+size: 69
