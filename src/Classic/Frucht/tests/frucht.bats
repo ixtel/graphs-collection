@@ -11,3 +11,11 @@ setup() {
   [ $frucht_g6_computed_order -eq $frucht_expected_order ]
   [ $frucht_g6_computed_size -eq $frucht_expected_size ]
 }
+
+@test "Frucht graph -> DOT" {
+  [ $frucht_gv_computed_chi -eq $frucht_expected_chi ]
+  [ $frucht_gv_computed_size -eq $frucht_expected_size ]
+  [ $frucht_gv_computed_maxdeg -eq $frucht_expected_maxdeg ]
+  [ $frucht_gv_computed_order -eq $frucht_expected_order ]
+}
+
